@@ -27,7 +27,7 @@ class PostProcessor(nn.Module):
         cls_agnostic_bbox_reg=False,
         bbox_aug_enabled=False,
         save_proposals=False,
-        custum_eval=False
+        custom_eval=False
     ):
         """
         Arguments:
@@ -48,7 +48,7 @@ class PostProcessor(nn.Module):
         self.cls_agnostic_bbox_reg = cls_agnostic_bbox_reg
         self.bbox_aug_enabled = bbox_aug_enabled
         self.save_proposals = save_proposals
-        self.custum_eval = custum_eval
+        self.custom_eval = custom_eval
 
     def forward(self, x, boxes, relation_mode=False):
         """
@@ -106,7 +106,7 @@ class PostProcessor(nn.Module):
 
     def add_important_fields(self, i, boxes, orig_inds, boxlist, boxes_per_cls, relation_mode=False):
         if relation_mode:
-            if not self.custum_eval:
+            if not self.custom_eval:
                 gt_labels = boxes[i].get_field('labels')[orig_inds]
                 gt_attributes = boxes[i].get_field('attributes')[orig_inds]
         
@@ -241,7 +241,7 @@ def make_roi_box_post_processor(cfg):
     post_nms_per_cls_topn = cfg.MODEL.ROI_HEADS.POST_NMS_PER_CLS_TOPN
     nms_filter_duplicates = cfg.MODEL.ROI_HEADS.NMS_FILTER_DUPLICATES
     save_proposals = cfg.TEST.SAVE_PROPOSALS
-    custum_eval = cfg.TEST.CUSTUM_EVAL
+    custom_eval = cfg.TEST.CUSTOM_EVAL
 
     postprocessor = PostProcessor(
         score_thresh,
@@ -253,6 +253,6 @@ def make_roi_box_post_processor(cfg):
         cls_agnostic_bbox_reg,
         bbox_aug_enabled,
         save_proposals,
-        custum_eval
+        custom_eval
     )
     return postprocessor

@@ -142,7 +142,7 @@ def inference(
         expected_results_sigma_tol=expected_results_sigma_tol,
     )
 
-    if cfg.TEST.CUSTUM_EVAL:
+    if cfg.TEST.CUSTOM_EVAL:
         detected_sgg = custom_sgg_post_precessing(predictions)
         with open(os.path.join(cfg.DETECTED_SGG_DIR, 'custom_prediction.json'), 'w') as outfile:  
             json.dump(detected_sgg, outfile)

@@ -234,7 +234,7 @@ def make_data_loader(cfg, mode='train', is_distributed=False, start_iter=0):
             collate_fn=collator,
         )
         # the dataset information used for scene graph detection on customized images
-        if cfg.TEST.CUSTUM_EVAL:
+        if cfg.TEST.CUSTOM_EVAL:
             custom_data_info = {}
             custom_data_info['idx_to_files'] = dataset.custom_files
             custom_data_info['ind_to_classes'] = dataset.ind_to_classes

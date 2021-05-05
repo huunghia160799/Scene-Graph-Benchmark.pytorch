@@ -576,8 +576,8 @@ _C.TEST.RELATION.SYNC_GATHER = False
 _C.TEST.ALLOW_LOAD_FROM_CACHE = True
 
 
-_C.TEST.CUSTUM_EVAL = False
-_C.TEST.CUSTUM_PATH = '.'
+_C.TEST.CUSTOM_EVAL = False
+_C.TEST.CUSTOM_PATH = '.'
 
 # ---------------------------------------------------------------------------- #
 # Misc options
