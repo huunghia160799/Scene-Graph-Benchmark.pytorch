@@ -37,3 +37,4 @@ datasets/vg/
 
 checkpoints
 *.zip
+slurm/
