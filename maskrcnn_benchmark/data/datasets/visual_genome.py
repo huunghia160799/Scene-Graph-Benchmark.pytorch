@@ -4,6 +4,8 @@ import torch
 import h5py
 import json
 from PIL import Image
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 import numpy as np
 from collections import defaultdict
 from tqdm import tqdm
@@ -115,10 +117,19 @@ class VGDataset(torch.utils.data.Dataset):
     def get_custom_imgs(self, path):
         self.custom_files = []
         self.img_info = []
+        count_img = 0
+        count_truncated_img = 0
         for file_name in os.listdir(path):
+            count_img += 1
             self.custom_files.append(os.path.join(path, file_name))
-            img = Image.open(os.path.join(path, file_name)).convert("RGB")
-            self.img_info.append({'width':int(img.width), 'height':int(img.height)})
+            try:
+                img = Image.open(os.path.join(path, file_name)).convert("RGB")
+                self.img_info.append({'width':int(img.width), 'height':int(img.height)})
+            except OSError as e:
+                count_truncated_img += 1
+                continue
+        print(f"Truncated images/Total images: {count_truncated_img} / {count_img}")
+        # exit()
 
     def get_img_info(self, index):
         # WARNING: original image_file.json has several pictures with false image size
