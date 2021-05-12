@@ -38,3 +38,4 @@ datasets/vg/
 checkpoints
 *.zip
 slurm/
+datasets/
